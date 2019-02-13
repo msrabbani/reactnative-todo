@@ -13,7 +13,7 @@ import {
   Text,
   View,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 type Props = {};
 
@@ -21,29 +21,46 @@ export default class App extends Component<Props> {
   constructor() {
     super();
     this.state = {
-      todos: [1, 2, 3],
+      todos: [],
       newTodo: '',
     };
   }
-  handleInputChange = event => {
-    this.setState({
-      newTodo: event.target.value,
-    });
-  };
 
-  handlePress = press => {};
+    handleTextChange= text => {
+        this.setState({
+            newTodo: text
+        })
+    }
+
+    handlePress = event => {
+        const todos = [...this.state.todos, this.state.newTodo]
+        this.setState({
+            todos, newTodo:''
+        })
+    }
+
+
   render() {
-    return (
-      <View style={styles.container}>
-        <TextInput
-          value={this.state.newTodo}
-          onChange={this.handleInputChange}
-        />
-        <TouchableHighlight onPress={this.handlePress}>
-          <Text>tap me!</Text>
-        </TouchableHighlight>
-        {this.state.todos.map((todo, i) => <Text key={i}>{todo}</Text>)}
-      </View>
+      return (
+          <View>
+
+              <TextInput
+                  value={this.state.newTodo}
+                  onChangeText={this.handleTextChange}
+              />
+
+          <TouchableOpacity onPress={this.handlePress}>
+                  <Text>Create</Text>
+              </TouchableOpacity>
+
+              <View>
+                  {this.state.todos.map((todo,i) => (
+                  <Text key={i}>{todo}</Text>
+                  ))}
+
+              </View>
+
+          </View>
     );
   }
 }
