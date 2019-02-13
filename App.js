@@ -24,6 +24,8 @@ export default class App extends Component<Props> {
       todos: [],
       newTodo: '',
     };
+
+    console.warn(JSON.stringify(this.state,null,2))
   }
 
     handleTextChange= text => {
