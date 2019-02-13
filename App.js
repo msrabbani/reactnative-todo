@@ -7,7 +7,14 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableHighlight,
+} from 'react-native';
 type Props = {};
 
 export default class App extends Component<Props> {
@@ -15,12 +22,26 @@ export default class App extends Component<Props> {
     super();
     this.state = {
       todos: [1, 2, 3],
+      newTodo: '',
     };
   }
+  handleInputChange = event => {
+    this.setState({
+      newTodo: event.target.value,
+    });
+  };
+
+  handlePress = press => {};
   render() {
     return (
       <View style={styles.container}>
-        <TextInput />
+        <TextInput
+          value={this.state.newTodo}
+          onChange={this.handleInputChange}
+        />
+        <TouchableHighlight onPress={this.handlePress}>
+          <Text>tap me!</Text>
+        </TouchableHighlight>
         {this.state.todos.map((todo, i) => <Text key={i}>{todo}</Text>)}
       </View>
     );
