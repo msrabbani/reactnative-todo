@@ -24,45 +24,39 @@ export default class App extends Component<Props> {
       todos: [],
       newTodo: '',
     };
-
-    console.warn(JSON.stringify(this.state,null,2))
   }
 
-    handleTextChange= text => {
-        this.setState({
-            newTodo: text
-        })
-    }
-
-    handlePress = event => {
-        const todos = [...this.state.todos, this.state.newTodo]
-        this.setState({
-            todos, newTodo:''
-        })
-    }
-
-
+  handleTextChange = text => {
+    this.setState({
+      newTodo: text,
+    });
+  };
+  handlePress = event => {
+    const todos = [...this.state.todos, this.state.newTodo];
+    this.setState({
+      todos,
+      newTodo: '',
+    });
+  };
   render() {
-      return (
-          <View>
+    return (
+      <View>
 
-              <TextInput
-                  value={this.state.newTodo}
-                  onChangeText={this.handleTextChange}
-              />
+        <TextInput
+          value={this.state.newTodo}
+          onChangeText={this.handleTextChange}
+        />
 
-          <TouchableOpacity onPress={this.handlePress}>
-                  <Text>Create</Text>
-              </TouchableOpacity>
+        <TouchableOpacity onPress={this.handlePress}>
+          <Text>Create</Text>
+        </TouchableOpacity>
 
-              <View>
-                  {this.state.todos.map((todo,i) => (
-                  <Text key={i}>{todo}</Text>
-                  ))}
+        <View>
+          {this.state.todos.map((todo, i) => <Text key={i}>{todo}</Text>)}
 
-              </View>
+        </View>
 
-          </View>
+      </View>
     );
   }
 }
