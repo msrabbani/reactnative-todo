@@ -31,12 +31,23 @@ export default class App extends Component<Props> {
       newTodo: text,
     });
   };
+
   handlePress = event => {
-    const todos = [...this.state.todos, this.state.newTodo];
-    this.setState({
-      todos,
-      newTodo: '',
-    });
+    fetch('http://localhost:3000/todos', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.newTodo,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        const todos = [...this.state.todos, data];
+      });
+    // const todos = [...this.state.todos, this.state.newTodo];
+    //this.setState({todos,newTodo: '',});
   };
 
   render() {
