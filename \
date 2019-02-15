@@ -1,0 +1,41 @@
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+
+class FetchAPI extends Component {
+
+    constructor(){
+        super()
+        this.state = {
+            apiData: [] 
+        }
+    }
+
+    componentDidMount() {
+        fetch('https://www.balldontlie.io/api/v1/teams', {
+            Accept:'application/json'
+        }) 
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    apiData: data.data.name
+                }) 
+            })
+    }
+
+
+    render() {
+        return(
+            <View>
+                {this.state.apiData.map(data=>(
+                <Text>{data}</Text>
+                ))}
+                <Text>
+
+                </Text>
+            </View>
+
+        )
+    }
+}
+
+export default FetchAPI
