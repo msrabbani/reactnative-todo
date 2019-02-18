@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
   Platform,
@@ -26,28 +18,42 @@ export default class App extends Component<Props> {
     };
   }
 
+    componentWillMount() {
+        fetch('http://localhost:3000/todos', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(todos => this.setState({todos}))
+    }
+
   handleTextChange = text => {
     this.setState({
       newTodo: text,
     });
   };
 
-  handlePress = event => {
-    fetch('http://localhost:3000/todos', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.state.newTodo,
-      }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        const todos = [...this.state.todos, data];
-      });
-    // const todos = [...this.state.todos, this.state.newTodo];
-    //this.setState({todos,newTodo: '',});
+    handlePress = event => {
+        fecth('http://localhost:3000/todos', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name:this.state.newTodo
+            })
+            .then(res => res.json())
+            .then(todo => {
+                const todos = [todo, ...this.state.todos]
+                this.setState({
+                    todos, newTodo:''
+                })
+            })
+
+        })
+    
+   
   };
 
   render() {
