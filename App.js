@@ -36,7 +36,7 @@ export default class App extends Component<Props> {
 
     handlePress = event => {
         fecth('http://localhost:3000/todos', {
-            method: 'post',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json'
             },
