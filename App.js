@@ -7,9 +7,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-type Props = {};
+import FetchAPI from './src/FetchAPI'
 
-export default class App extends Component<Props> {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -58,7 +58,8 @@ export default class App extends Component<Props> {
 
   render() {
     return (
-      <View style={styles.container}>
+        <View style={styles.container}>
+            <FetchAPI/>
 
         <View style={styles.form}>
 

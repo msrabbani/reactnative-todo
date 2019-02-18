@@ -1,41 +1,20 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import React from 'react'
+import {View, Text} from 'react-native'
+import { connect } from 'react-redux'
 
-class FetchAPI extends Component {
+const _FetchAPI = (props) => (
+        <View>
+                {props.datas.map(data => 
+                    <Text>{data.name}</Text>
+                )}
 
-    constructor(){
-        super()
-        this.state = {
-            apiDatas: [] 
-        }
-    }
+        </View>
+)
 
-    componentDidMount() {
-        fetch('https://www.balldontlie.io/api/v1/teams', {
-            Accept:'application/json'
-        }) 
-            .then(res => res.json())
-            .then(datas => {
-                this.setState({
-                    apiDatas: datas.data
-                }) 
-            })
-    }
+const mapStateToProps = (state) => ({
+    datas: state.fetchAPI
+})
 
-
-    render() {
-        return(
-            <View>
-                {this.state.apiDatas.map(data=>(
-                <Text key={data.id}>{data.name}</Text>
-                ))}
-                <Text>
-
-                </Text>
-            </View>
-
-        )
-    }
-}
+const FetchAPI = connect(mapStateToProps)(_FetchAPI)
 
 export default FetchAPI
