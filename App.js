@@ -4,10 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  TouchableOpacity,
 } from 'react-native';
-import FetchAPI from './src/FetchAPI'
+import { TodoForm } from './src/TodoForm'
 
 export default class App extends Component {
   constructor() {
@@ -18,7 +16,7 @@ export default class App extends Component {
     };
   }
 
-    componentWillMount() {
+    /*    componentWillMount() {
         fetch('http://localhost:3000/todos', {
             headers: {
                 'Accept': 'application/json'
@@ -26,7 +24,7 @@ export default class App extends Component {
         })
             .then(res => res.json())
             .then(todos => this.setState({todos}))
-    }
+} */
 
   handleTextChange = text => {
     this.setState({
@@ -34,84 +32,38 @@ export default class App extends Component {
     });
   };
 
-    handlePress = event => {
-        fecth('http://localhost:3000/todos', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                name:this.state.newTodo
-            })
-            .then(res => res.json())
-            .then(todo => {
-                const todos = [todo, ...this.state.todos]
-                this.setState({
-                    todos, newTodo:''
-                })
-            })
-
+    handlePress = () => {
+        const todos = [...this.state.todos, this.state.newTodo]
+        this.setState({
+            todos, newTodo: ''
         })
-    
-   
   };
 
   render() {
     return (
         <View style={styles.container}>
-            <FetchAPI/>
-
-        <View style={styles.form}>
-
-          <TextInput
-            style={styles.input}
-            value={this.state.newTodo}
-            onChangeText={this.handleTextChange}
-          />
-
-          <TouchableOpacity style={styles.button} onPress={this.handlePress}>
-            <Text style={styles.buttonText}>Create</Text>
-          </TouchableOpacity>
-        </View>
-
+            <TodoForm 
+                handlePress={this.handlePress}
+                handleTextChange={this.handleTextChange}
+                value={this.state.newTodo}
+            />
         <View style={styles.todos}>
           {this.state.todos.map((todo, i) => (
             <View key={i} style={styles.todo}>
               <Text style={styles.todoText}>{todo}</Text>
             </View>
           ))}
-
         </View>
-
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-  },
-  form: {
-    flexDirection: 'row',
-  },
-  input: {
-    flex: 0.7,
-    fontSize: 18,
-  },
-  button: {
-    flex: 0.3,
-    borderWidth: 1,
-    height: 50,
-    borderColor: 'green',
-    borderRadius: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 22,
-    fontWeight: 'bold',
   },
   todos: {
     marginTop: 30,
