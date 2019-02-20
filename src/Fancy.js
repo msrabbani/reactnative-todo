@@ -12,11 +12,8 @@ class Fancy extends Component {
             <View style={styles.container}>
                 <View style={styles.box}>
                 </View>
-
                 <Text style={styles.text}>Fancy</Text>
-
             </View>
-
         )
     }
 }

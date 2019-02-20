@@ -1,21 +1,19 @@
 import { combineReducers } from 'redux'
 
-const FETCH_POSTS = 'FETCH_POSTS'
-const FETCH_POSTS_COMPLETE = 'FETCH_POSTS_COMPLETE'
+const CREATE_TODO = "CREATE_TODO" //action name
 
-const fetchAPI = (state = [
-    {name: 'demo'}, {name: 'hello'}
-], action) => {
+const users = (state = {}, actions) => {
+    return state
+}
+
+const todos = (state=[], action) => { //reducer
     switch (action.type) {
-        case FETCH_POSTS:
-            return state
-        case FETCH_POSTS_COMPLETE:
-            return action.payload
-        default:
+        case CREATE_TODO:
+            return [action.payload, ...state]
+        default: 
             return state
     }
 }
 
-export const reducer = combineReducers({fetchAPI})
-
+export const reducer = combineReducers({todos, users})
  
