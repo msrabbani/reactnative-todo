@@ -1,18 +1,19 @@
 import { combineReducers } from 'redux'
 
-const ADD_POST = 'ADD_POST'
+const CREATE_TODO = "CREATE_TODO" //action name
 
-const fetchAPI = (state = [
-    {name: 'demo'}, {name: 'hello'}
-], action) => {
+const users = (state = {}, actions) => {
+    return state
+}
+
+const todos = (state=[], action) => { //reducer
     switch (action.type) {
-        case ADD_POSTS:
+        case CREATE_TODO:
             return [action.payload, ...state]
-        default:
+        default: 
             return state
     }
 }
 
-export const reducer = combineReducers({fetchAPI})
-
+export const reducer = combineReducers({todos, users})
  
