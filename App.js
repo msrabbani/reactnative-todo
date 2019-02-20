@@ -6,12 +6,14 @@ import {
   View,
 } from 'react-native';
 import { TodoForm } from './src/TodoForm'
+import { connect } from 'react-redux'
 
 export default class App extends Component {
+  static defaultProps = {todos: []}
+
   constructor() {
     super();
     this.state = {
-      todos: [],
       newTodo: '',
     };
   }
@@ -33,9 +35,10 @@ export default class App extends Component {
   };
 
     handlePress = () => {
-        const todos = [...this.state.todos, this.state.newTodo]
+        //const todos = [...this.state.todos, this.state.newTodo]
+        this.props.createTodo(this.state.newTodo)
         this.setState({
-            todos, newTodo: ''
+            newTodo: ''
         })
   };
 
@@ -48,7 +51,7 @@ export default class App extends Component {
                 value={this.state.newTodo}
             />
         <View style={styles.todos}>
-          {this.state.todos.map((todo, i) => (
+          {this.props.todos.map((todo, i) => (
             <View key={i} style={styles.todo}>
               <Text style={styles.todoText}>{todo}</Text>
             </View>
@@ -57,8 +60,19 @@ export default class App extends Component {
       </View>
     );
   }
-
 }
+
+const mapActionsToProps = (dispatch) => ({
+    createTodo(todo) {
+        dispatch({type: 'CREATE_TODO', payload: todo})
+    }
+})
+
+const mapStateToProps = (state) => ({
+    todos: state.todos
+})
+
+export const Todo = connect(mapStateToProps, mapActionsToProps)(App)
 
 const styles = StyleSheet.create({
   container: {
