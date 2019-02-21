@@ -18,24 +18,13 @@ export default class App extends Component {
     };
   }
 
-    /*    componentWillMount() {
-        fetch('http://localhost:3000/todos', {
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(todos => this.setState({todos}))
-} */
-
-  handleTextChange = text => {
+  handleTextChange = (text) => {
     this.setState({
       newTodo: text,
     });
   };
 
     handlePress = () => {
-        //const todos = [...this.state.todos, this.state.newTodo]
         this.props.createTodo(this.state.newTodo)
         this.setState({
             newTodo: ''
