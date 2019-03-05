@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "postInstall": "rnpm link"
   },
   "dependencies": {
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
+    "react-native-linear-gradient": "^2.5.3",
     "react-native-scrollable-tab-view": "^0.10.0",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1"
