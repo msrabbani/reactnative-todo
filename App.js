@@ -35,7 +35,7 @@ export default class App extends Component {
   render() {
     return (
         <LinearGradient 
-            colors={['#f00', '#0f0']}
+            colors={['#ff9400', '#ffd632']}
             style={styles.container}>
             <TodoForm 
                 handlePress={this.handlePress}
