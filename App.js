@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { TodoForm } from './src/TodoForm'
 import { connect } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class App extends Component {
   static defaultProps = {todos: []}
@@ -33,7 +34,9 @@ export default class App extends Component {
 
   render() {
     return (
-        <View style={styles.container}>
+        <LinearGradient 
+            colors={['#ff9400', '#ffd632']}
+            style={styles.container}>
             <TodoForm 
                 handlePress={this.handlePress}
                 handleTextChange={this.handleTextChange}
@@ -46,7 +49,7 @@ export default class App extends Component {
             </View>
           ))}
         </View>
-      </View>
+      </LinearGradient>
     );
   }
 }
